@@ -1,0 +1,40 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap-grid.min.css" />
+<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+
+@* the data entry table  *@
+<div class="text-center">
+    <h1 class="display-4">Calculator</h1>
+    <p> enter two numbers then press Calculate button to see their statistics. </p>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Input.NumberOne"></label>
+            <input asp-for="Input.NumberOne" />
+            <span asp-validation-for="Input.NumberOne" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="numberTwo">Number Two</label>
+            <input type="number" class="form-control" id="numberTwo" placeholder="Enter a number">
+        </div>
+        <div class="form-group">
+            <label for="numberThree">Number Three</label>
+            <input type="number" class="form-control" id="numberThree" placeholder="Enter a number">
+        </div>
+        <div class="form-group">
+            <label for="numberFour">Number Four</label>
+            <input type="number" class="form-control" id="numberFour" placeholder="Enter a number">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Calculate</button>
+    </form>
+</div>
+
+
+@* form validation logic  *@
+@code{
+
+}
