@@ -3,38 +3,56 @@
 @{
     ViewData["Title"] = "Home page";
 }
-<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap-grid.min.css" />
-<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap-grid.css" />
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+@* the Razor Pages engine will dynamically inject the necessary
+part to finish the front-end validation such as displaying feedback messages *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 @* the data entry table  *@
+
 <div class="text-center">
     <h1 class="display-4">Calculator</h1>
-    <p> enter two numbers then press Calculate button to see their statistics. </p>
+    <p>Enter two numbers then press Calculate button to see their statistics.</p>
     <form method="post">
         <div class="form-group">
-            <label asp-for="Input.NumberOne"></label>
-            <input asp-for="Input.NumberOne" />
-            <span asp-validation-for="Input.NumberOne" class="text-danger"></span>
+            <label asp-for="InputModel.NumberOne"></label>
+            <input asp-for="InputModel.NumberOne" />
+            <span asp-validation-for="InputModel.NumberOne" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="numberTwo">Number Two</label>
-            <input type="number" class="form-control" id="numberTwo" placeholder="Enter a number">
+            <label asp-for="InputModel.NumberTwo"></label>
+            <input asp-for="InputModel.NumberTwo" />
+            <span asp-validation-for="InputModel.NumberTwo" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="numberThree">Number Three</label>
-            <input type="number" class="form-control" id="numberThree" placeholder="Enter a number">
+            <label asp-for="InputModel.NumberThree"></label>
+            <input asp-for="InputModel.NumberThree" />
+            <span asp-validation-for="InputModel.NumberThree" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="numberFour">Number Four</label>
-            <input type="number" class="form-control" id="numberFour" placeholder="Enter a number">
+            <label asp-for="InputModel.NumberFour"></label>
+            <input asp-for="InputModel.NumberFour" />
+            <span asp-validation-for="InputModel.NumberFour" class="text-danger"> </span>
         </div>
-        
         <button type="submit" class="btn btn-primary">Calculate</button>
     </form>
 </div>
 
 
-@* form validation logic  *@
-@code{
+@* form validation logic handled in code-behind *@
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+
+
+@if (Model.StatisticsResult != null)
+{
+    <div>
+        @Html.Raw(Model.StatisticsResult)
+    </div>
 }
