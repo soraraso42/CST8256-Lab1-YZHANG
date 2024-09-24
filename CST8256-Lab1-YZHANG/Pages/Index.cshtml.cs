@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.Extensions.Logging; // Add this for logging
 
 // set up  a plain data model for the form that accepts four numbers
 public class InputModel
@@ -32,9 +33,8 @@ public class IndexModel : PageModel
     // validate input data
     public void OnPost()
     {
+
         
-       
-         
         // implement custom validation logic
         // first check that at least two numbers are entered
         double one = 0.0;
@@ -82,6 +82,22 @@ public class IndexModel : PageModel
         }
         // TODO : has to be a way NOT to hard code the counter logic
 
+        // debugger CONFIRMED correct key value binding for each field
+        foreach (var entry in ModelState)
+        {
+            foreach (var error in entry.Value.Errors)
+            {
+                Console.WriteLine($"Field: {entry.Key}, Error: {error.ErrorMessage}");
+            }
+        }
+
+        // debugger end
+
+        // debugger ModelState is passed to view correctly 
+        if (!ModelState.IsValid)
+        {
+            Console.WriteLine("ModelState is invalid");  // This should print when there's an error.
+        }
 
         // handle error where entire form has fewer than two numbers
         if (counter <2)
