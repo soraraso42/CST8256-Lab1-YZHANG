@@ -44,6 +44,9 @@ public class IndexModel : PageModel
         // use list instead of array for unknown size of enums
         List<double> doubles = new List<double>();
         int counter = 0;
+        // NOTE: a generic method with three parameters can be used to dynamically 
+        // validate input method(input string, output double, errorMessage string)
+
         if (double.TryParse(InputModel.NumberOne, out one)) 
         {
             counter++;
